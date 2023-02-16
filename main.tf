@@ -135,7 +135,8 @@ resource "aws_ecs_service" "service" {
       container_port = lookup(service_registries.value, "container_port", null)
     }
   }
-  task_definition = var.task_definition_arn
+  #When deployment_controller is EXTERNAL or CODE_DEPLOY, task_definition must not be used
+  task_definition = lookup(one(var.deployment_controller[*]), "type", "TTT") == "ECS" ? var.task_definition_arn : null
   tags = merge(
     var.tags,
     {
