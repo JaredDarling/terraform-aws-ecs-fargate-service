@@ -143,6 +143,15 @@ resource "aws_ecs_service" "service" {
       Name = "${var.name_prefix}-ecs-tasks-sg"
     },
   )
+
+  lifecycle {
+    ignore_changes = [
+      desired_count, #Can be changed by autoscaling
+      task_definition, #Can be changed by deployments (CodeDeploy)
+      load_balancer, #Can be changed by deployments (CodeDeploy)
+      deployment_circuit_breaker
+    ]
+  }
 }
 
 #------------------------------------------------------------------------------
