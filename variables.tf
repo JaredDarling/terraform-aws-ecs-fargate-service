@@ -76,7 +76,7 @@ variable "ordered_placement_strategy" {
 variable "deployment_controller" {
   description = "(Optional) Deployment controller default: 'ECS'"
   type        = list(any)
-  default     = [
+  default = [
     {
       type = "ECS"
     }
@@ -107,8 +107,8 @@ variable "service_registries" {
 
 variable "task_definition_arn" {
   description = "(Optional) The full ARN of the task definition that you want to run in your service."
-  default = ""
-  type = string
+  default     = ""
+  type        = string
 }
 
 variable "force_new_deployment" {

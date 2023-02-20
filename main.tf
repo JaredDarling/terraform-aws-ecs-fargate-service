@@ -4,9 +4,9 @@
 module "ecs-alb" {
   count = var.custom_lb_arn == null ? 1 : 0
 
-#  source  = "cn-terraform/ecs-alb/aws"
-#  version = "1.0.29"
-  source  = "github.com/JaredDarling/terraform-aws-ecs-alb.git?ref=test"
+  #  source  = "cn-terraform/ecs-alb/aws"
+  #  version = "1.0.29"
+  source = "github.com/JaredDarling/terraform-aws-ecs-alb.git?ref=test"
 
 
   name_prefix = var.name_prefix
@@ -147,9 +147,9 @@ resource "aws_ecs_service" "service" {
 
   lifecycle {
     ignore_changes = [
-      desired_count, #Can be changed by autoscaling
-      task_definition, #Can be changed by deployments (CodeDeploy)
-      load_balancer, #Can be changed by deployments (CodeDeploy)
+      desired_count,         #Can be changed by autoscaling
+      task_definition,       #Can be changed by deployments (CodeDeploy)
+      load_balancer,         #Can be changed by deployments (CodeDeploy)
       network_configuration, #Can be changed by deployments (CodeDeploy)
       deployment_circuit_breaker
     ]
