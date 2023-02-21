@@ -8,7 +8,6 @@ module "ecs-alb" {
   #  version = "1.0.29"
   source = "github.com/JaredDarling/terraform-aws-ecs-alb.git?ref=test"
 
-
   name_prefix = var.name_prefix
   vpc_id      = var.vpc_id
 
@@ -137,7 +136,7 @@ resource "aws_ecs_service" "service" {
     }
   }
   #When deployment_controller is EXTERNAL or CODE_DEPLOY, task_definition must not be used
-  task_definition = lookup(one(var.deployment_controller[*]), "type", "TTT") == "ECS" ? var.task_definition_arn : null
+  task_definition = lookup(one(var.deployment_controller[*]), "type", "ECS") == "ECS" ? var.task_definition_arn : null
   tags = merge(
     var.tags,
     {
