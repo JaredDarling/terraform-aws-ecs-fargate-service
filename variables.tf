@@ -230,6 +230,19 @@ variable "custom_lb_arn" {
   default     = null
 }
 
+variable "additional_lbs" {
+  default     = {}
+  description = "Additional load balancers to add to ECS service"
+  type = map(object
+    (
+      {
+        target_group_arn = string
+        container_port   = number
+      }
+    )
+  )
+}
+
 variable "lb_internal" {
   description = "(Optional) If true, the LB will be internal."
   type        = bool
